@@ -1,0 +1,23 @@
+# Core framework versions as per paper
+torch==1.13.1+cu117
+torchvision==0.14.1+cu117
+torchaudio==0.13.1
+# Get CUDA-enabled wheels
+-f https://download.pytorch.org/whl/torch_stable.html
+
+# YOLOv8 (installed in editable mode separately)
+ultralytics
+
+# Core dependencies
+numpy
+opencv-python
+matplotlib
+scipy
+pyyaml
+tqdm
+pillow
+requests
+
+# Optional/Useful
+pandas
+tensorboard
