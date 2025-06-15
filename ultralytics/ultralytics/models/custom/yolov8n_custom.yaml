@@ -1,0 +1,29 @@
+# yolov8n_custom.yaml — Based on SAR Small Ship Detection Paper Architecture
+
+nc: 1  # Number of classes
+
+depth_multiple: 1.0
+width_multiple: 1.0
+
+backbone:
+  [
+    [-1, 1, Conv, [32, 3, 1]],                  # Initial conv
+    [-1, 1, SPDModule, [64]],                   # SPD-1 (Downsampling to 64 channels)
+    [-1, 1, SRBlock, [64]],                     # SRBlock-1
+    [-1, 1, SRBlock, [64]],                     # SRBlock-2
+    [-1, 1, SPDModule, [128]],                  # SPD-2 (Downsampling to 128 channels)
+    [-1, 1, SRBlock, [128]],                    # SRBlock-3
+    [-1, 1, SRBlock, [128]],                    # SRBlock-4
+    [-1, 1, Conv, [256, 3, 2]],                 # Downsampling via strided conv
+    [-1, 1, C2f, [256, True]],                  # YOLO-style block
+  ]
+
+neck:
+  [
+    [-1, 1, C2f, [256]],                        # Fusion
+    [-1, 1, HybridAttention, [256]],            # Attention module
+    [-1, 1, C2f, [256]],                        # Final fusion
+  ]
+
+head:
+  - [[-1, -2, -3], 1, Detect, [nc]]
