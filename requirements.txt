@@ -5,9 +5,6 @@ torchaudio==0.13.1
 # Get CUDA-enabled wheels
 -f https://download.pytorch.org/whl/torch_stable.html
 
-# YOLOv8 (installed in editable mode separately)
-ultralytics
-
 # Core dependencies
 numpy
 opencv-python
